@@ -48,10 +48,10 @@ for (subject_id, func, motion) in zip(dataset.subject_id,
          "AV600-AV300": contrasts["AudVid600"] - contrasts["AudVid300"],
          "AV-Vid": (contrasts["AudVid1200"] +
                     contrasts["AudVid600"] +
-                    contrasts["AudVid300"]) - contrasts["VidOnly"],
+                    contrasts["AudVid300"]) - 3 * contrasts["VidOnly"],
          "AV-Aud": (contrasts["AudVid1200"] +
                     contrasts["AudVid600"] +
-                    contrasts["AudVid300"]) - contrasts["AudOnly"],
+                    contrasts["AudVid300"]) - 3 * contrasts["AudOnly"],
          })
 
     for index, (contrast_id, contrast_val) in enumerate(contrasts.items()):
