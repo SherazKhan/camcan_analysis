@@ -45,6 +45,8 @@ ANATOMICAL_PATH = 'anat'
 # pattern of the different files of interests
 FUNC_PATTERN = 'wrsub-*.nii.gz'
 MVT_PATTERN = 'rp*.txt'
+FD_PATTERN = 'fd*.txt'
+CC_PATTERN = 'cc*.txt'
 ANAT_PATTERN = 'wsub-*.nii.gz'
 TISSUES_PATTERN = ['mwc1sub-*.nii.gz', 'mwc2sub-*.nii.gz', 'mwc3sub-*.nii.gz']
 
@@ -253,6 +255,8 @@ def load_camcan_rest(data_dir=CAMCAN_DRAGO_STORE,
 
     dataset = {'func': [],
                'motion': [],
+               'fd': [],
+               'compcor': [],
                'anat': [],
                'tissues': [],
                'subject_id': [],
@@ -263,12 +267,16 @@ def load_camcan_rest(data_dir=CAMCAN_DRAGO_STORE,
         # Discover one after the other:
         # - functional images;
         # - motion parameters;
+        # - FramewiseDisplacement parameters;
+        # - CompCor parameters;
         # - anatomical images;
         # - tissues segmented.
-        for p, f, k in zip([FUNCTIONAL_PATH] * 2 + [ANATOMICAL_PATH] * 4,
-                           [FUNC_PATTERN, MVT_PATTERN, ANAT_PATTERN] +
+        for p, f, k in zip([FUNCTIONAL_PATH] * 4 + [ANATOMICAL_PATH] * 4,
+                           [FUNC_PATTERN, MVT_PATTERN, FD_PATTERN,
+                            CC_PATTERN, ANAT_PATTERN] +
                            TISSUES_PATTERN,
-                           ['func', 'motion', 'anat'] + ['tissues'] * 3):
+                           ['func', 'motion', 'fd',
+                            'compcor', 'anat'] + ['tissues'] * 3):
 
             nifti_path = glob.glob(join(subject_dir, p, f))
             if not nifti_path:
