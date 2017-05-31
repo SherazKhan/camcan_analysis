@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 
 ATLAS = 'basc122'
 METRIC = 'tangent'
-CONN_DIR = '/storage/data/camcan_connectivity'
-CSV_FILE = '/storage/data/cc700-scored/participant_data.csv'
+CONN_DIR = '/storage/data/camcan/camcan_connectivity'
+CSV_FILE = '/storage/data/camcan/cc700-scored/participant_data.csv'
 dataset = load_camcan_connectivity_rest(
     data_dir=CONN_DIR, patients_info_csv=CSV_FILE,
     atlas=ATLAS, kind=METRIC)
